@@ -1,0 +1,71 @@
+/* style.css */
+
+/* Styles pour la navbar */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #076f7d;
+    display :flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+nav h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+nav h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+nav li a:hover {
+    background-color: #555;
+}
+
+/* Styles pour les titres et le contenu */
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h1,h3 {
+    color: #076f7d;
+    display :flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    color: #454444;
+    margin-bottom: 10px;
+}
+
+.article {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 30px;
+}
+.article h5 {
+    display: inline-block;
+    margin-right: 10px;
+}

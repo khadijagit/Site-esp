@@ -1,0 +1,58 @@
+<?php
+
+class UserModel {
+    // Méthode pour créer un nouvel utilisateur
+    public function createUser($nom, $email, $mot_de_passe) {
+        global $connexion;
+
+        // Hasher le mot de passe avant de le stocker dans la base de données
+        $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
+        // Requête SQL pour insérer l'utilisateur dans la table
+        $requeteInsert = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (:nom, :email, :mot_de_passe)";
+        $requetePreparee = $connexion->prepare($requeteInsert);
+        $requetePreparee->bindParam(':nom', $nom);
+        $requetePreparee->bindParam(':email', $email);
+        $requetePreparee->bindParam(':mot_de_passe', $mot_de_passe_hash);
+        $requetePreparee->execute();
+    }
+
+    // Méthode pour lire les informations d'un utilisateur par son ID
+    public function readUser($id) {
+        global $connexion;
+
+        // Requête SQL pour récupérer l'utilisateur par son ID
+        $requeteSelect = "SELECT id, nom, email FROM utilisateurs WHERE id = :id";
+        $requetePreparee = $connexion->prepare($requeteSelect);
+        $requetePreparee->bindParam(':id', $id);
+        $requetePreparee->execute();
+        $utilisateur = $requetePreparee->fetch(PDO::FETCH_ASSOC);
+
+        return $utilisateur;
+    }
+
+    // Méthode pour mettre à jour les informations d'un utilisateur
+    public function updateUser($id, $nom, $email) {
+        global $connexion;
+
+        // Requête SQL pour mettre à jour les informations de l'utilisateur
+        $requeteUpdate = "UPDATE utilisateurs SET nom = :nom, email = :email WHERE id = :id";
+        $requetePreparee = $connexion->prepare($requeteUpdate);
+        $requetePreparee->bindParam(':nom', $nom);
+        $requetePreparee->bindParam(':email', $email);
+        $requetePreparee->bindParam(':id', $id);
+        $requetePreparee->execute();
+    }
+
+    // Méthode pour supprimer un utilisateur par son ID
+    public function deleteUser($id) {
+        global $connexion;
+
+        // Requête SQL pour supprimer l'utilisateur de la base de données
+        $requeteDelete = "DELETE FROM utilisateurs WHERE id = :id";
+        $requetePreparee = $connexion->prepare($requeteDelete);
+        $requetePreparee->bindParam(':id', $id);
+        $requetePreparee->execute();
+    }
+}
+?>

@@ -1,0 +1,20 @@
+<!-- updateProfile_process.php -->
+
+<?php
+require_once 'config.php';
+require_once 'controllers/UsersController.php';
+
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $nom = $_POST['nom'];
+    $email = $_POST['email'];
+
+    $usersController = new UsersController();
+    $usersController->updateUser($userId, $nom, $email);
+
+    // Redirection vers la page de profil après la mise à jour réussie
+    header("Location: profile.php");
+    exit;
+}
+?>
